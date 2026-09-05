@@ -275,28 +275,54 @@ ${form.date ? `- *Date* : ${form.date}\n` : ""}${
         </div>
       </section>
 
-      {/* ─── Map placeholder ─── */}
-      <section className="h-72 bg-[#1a0a10] relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=1600&h=400&fit=crop&auto=format"
-          alt="Dakar, Sénégal"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span
-                className="text-xl font-bold"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Grand Yoff / Scat Urbam, Dakar
-              </span>
+      {/* ─── Google Maps Section ─── */}
+      <section className="relative bg-[#1a0a10] border-t border-[#D4AF37]/20">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <div>
+              <div className="flex items-center gap-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <h3
+                  className="text-2xl font-bold text-white"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  Notre Emplacement à Dakar
+                </h3>
+              </div>
+              <p className="text-white/60 text-sm mt-1">
+                Grand Yoff / Scat Urbam, Dakar · Sénégal · Service traiteur & livraison
+              </p>
             </div>
-            <p className="text-white/60 text-sm">Sénégal · Livraison à domicile disponible</p>
+
+            <a
+              href="https://maps.google.com/?q=14.734995,-17.455011"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gold text-[#1a0a10] font-semibold text-xs rounded-sm hover:bg-gold-light transition-colors shrink-0"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Ouvrir dans Google Maps
+            </a>
+          </div>
+
+          {/* Interactive Map Iframe */}
+          <div className="w-full h-80 sm:h-96 rounded-sm overflow-hidden border border-gold/30 shadow-lg relative bg-[#1a0a10]">
+            <iframe
+              title="Localisation Dija Traiteur"
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: "contrast(1.05) saturate(1.1)" }}
+              loading="lazy"
+              allowFullScreen
+              src="https://maps.google.com/maps?q=14.734995,-17.455011&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            />
           </div>
         </div>
       </section>
