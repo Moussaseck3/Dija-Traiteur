@@ -1,7 +1,7 @@
 import type { Page } from "../App";
 
 interface HomeProps {
-  navigate: (page: Page) => void;
+  navigate: (page: Page, targetId?: string) => void;
 }
 
 export default function Home({ navigate }: HomeProps) {
@@ -140,7 +140,7 @@ export default function Home({ navigate }: HomeProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
             {events.map((ev) => (
-              <EventCard key={ev.title} {...ev} onMore={() => navigate("services")} />
+              <EventCard key={ev.title} {...ev} onMore={() => navigate("services", ev.targetId)} />
             ))}
           </div>
         </div>
@@ -274,6 +274,7 @@ function SectionHeader({
 
 const events = [
   {
+    targetId: "mariages",
     title: "Mariages",
     emoji: "💍",
     img: "image1.jpeg",
@@ -281,6 +282,7 @@ const events = [
     badge: "Prestige",
   },
   {
+    targetId: "baptemes",
     title: "Baptêmes",
     emoji: "🍼",
     img: "bapteme.jpeg",
@@ -288,6 +290,7 @@ const events = [
     badge: "Famille",
   },
   {
+    targetId: "seminaires",
     title: "Séminaires",
     emoji: "💼",
     img: "image10.jpeg",
@@ -295,6 +298,7 @@ const events = [
     badge: "Corporate",
   },
   {
+    targetId: "anniversaires",
     title: "Anniversaires",
     emoji: "🎂",
     img: "image4.jpeg",

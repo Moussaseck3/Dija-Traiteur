@@ -10,6 +10,9 @@ export default function Contact() {
     invites: "",
     message: "",
   });
+
+  
+
   const [submitted, setSubmitted] = useState(false);
 
   const [whatsappUrl, setWhatsappUrl] = useState("");

@@ -1,7 +1,7 @@
 import type { Page } from "../App";
 
 interface FooterProps {
-  navigate: (page: Page) => void;
+  navigate: (page: Page, targetId?: string) => void;
 }
 
 export default function Footer({ navigate }: FooterProps) {

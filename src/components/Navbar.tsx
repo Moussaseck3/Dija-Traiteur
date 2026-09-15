@@ -3,7 +3,7 @@ import type { Page } from "../App";
 
 interface NavbarProps {
   currentPage: Page;
-  navigate: (page: Page) => void;
+  navigate: (page: Page, targetId?: string) => void;
 }
 
 const menuItems: { label: string; page: Page }[] = [
@@ -47,7 +47,7 @@ export default function Navbar({ currentPage, navigate }: NavbarProps) {
                 Dija Traiteur
               </div>
               <div className="text-[9px] text-gold font-semibold tracking-[0.2em] uppercase leading-none mt-1">
-                Excellence Culinaire
+                Yaay Chef
               </div>
             </div>
           </button>

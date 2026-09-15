@@ -1,7 +1,7 @@
 import type { Page } from "../App";
 
 interface ServicesProps {
-  navigate: (page: Page) => void;
+  navigate: (page: Page, targetId?: string) => void;
 }
 
 export default function Services({ navigate }: ServicesProps) {
@@ -9,10 +9,10 @@ export default function Services({ navigate }: ServicesProps) {
     <div className="bg-white">
       {/* ─── Banner Header ─── */}
       <section className="relative py-24 sm:py-32 bg-[#1a0a10] overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-15">
           <img
-            src="https://images.unsplash.com/photo-1555244162-803834f70033?w=1600&h=600&fit=crop&auto=format"
-            alt=""
+            src="/images/image7.jpeg"
+            alt="Dija Traiteur Événements"
             className="w-full h-full object-cover"
           />
         </div>
@@ -47,7 +47,7 @@ export default function Services({ navigate }: ServicesProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionLabel label="Prestations Événementielles" />
 
-          <div className="space-y-16 mt-12">
+          <div className="space-y-20 mt-14">
             {eventServices.map((svc, i) => (
               <EventServiceRow key={svc.title} {...svc} reverse={i % 2 !== 0} />
             ))}
@@ -60,19 +60,21 @@ export default function Services({ navigate }: ServicesProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionLabel label="Commandes Spéciales" />
 
-          <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             {/* Sucrées */}
             <SpecialOrderCard
               title="Plateaux Sucrés"
               subtitle="Pâtisseries & Douceurs"
-              img="photo-1488477181946-6428a0291777"
+              img="imagesucres.jpeg"
               items={[
-                "Macarons assortis",
+                "Crêpe au chocolat",
                 "Gâteaux d'anniversaire personnalisés",
                 "Verrines sucrées",
                 "Mignardises & petits fours",
                 "Cookies & brownies gourmets",
-                "Financiers, madeleines, cannelés",
+                "Cake, madeleines, goffre",
+                "Beignet, tartelette",
+               
               ]}
               color="raspberry"
             />
@@ -81,14 +83,15 @@ export default function Services({ navigate }: ServicesProps) {
             <SpecialOrderCard
               title="Plateaux Salés"
               subtitle="Finger Food & Apéritifs"
-              img="photo-1551218808-94e220e084d2"
+              img="imagesalees.jpeg"
               items={[
-                "Mini-burgers gastronomiques",
-                "Verrines salées variées",
+                "Mini-burgers gastronomiques, pizza",
                 "Brochettes de viandes & légumes",
-                "Canapés & toasts",
-                "Wraps & sandwichs cocktail",
-                "Saucisses en feuilleté, bouchées",
+                "Wraps & brochette de poulet panée",
+                "Saucisses en feuilleté, batbout",
+                "Fataya, rissole, mini-tacos, tortilla panée",
+                "Quiche, beignet-crevette ",
+                "Croque-monsieur, samoussa",
               ]}
               color="gold"
             />
@@ -163,9 +166,10 @@ function SectionLabel({ label }: { label: string }) {
 
 const eventServices = [
   {
+    id: "mariages",
     title: "Mariages",
     badge: "Prestige",
-    img: "photo-1519225421980-715cb0215aed",
+    img: "image1.jpeg",
     tagline: "Le plus beau jour de votre vie, sublimé",
     desc: "Nous orchestrons l'expérience culinaire complète de votre mariage — du cocktail d'accueil au dîner de gala. Buffets premium, service à table élégant, menus franco-sénégalais ou fusion selon vos vœux. Chaque assiette est une déclaration.",
     features: [
@@ -177,9 +181,10 @@ const eventServices = [
     ],
   },
   {
+    id: "baptemes",
     title: "Baptêmes",
     badge: "Famille",
-    img: "photo-1583394293214-0d41c4d5ff38",
+    img: "bapteme.jpeg",
     tagline: "Une célébration douce et mémorable",
     desc: "Le baptême est un moment de joie partagée. Nous préparons des tables généreuses et joyeuses, avec des buffets familiaux, des plateaux de douceurs pour les petits et des mets festifs pour les grands.",
     features: [
@@ -191,9 +196,10 @@ const eventServices = [
     ],
   },
   {
+    id: "seminaires",
     title: "Séminaires & Événements Corporate",
     badge: "Corporate",
-    img: "photo-1517248135467-4c7edcad34c4",
+    img: "image10.jpeg",
     tagline: "Votre professionnalisme, notre savoir-faire",
     desc: "Pauses café soignées, lunch boxes équilibrés ou grands buffets d'entreprise — nous accompagnons vos événements professionnels avec ponctualité et discrétion, pour des participants concentrés et rassasiés.",
     features: [
@@ -205,9 +211,10 @@ const eventServices = [
     ],
   },
   {
+    id: "anniversaires",
     title: "Anniversaires",
     badge: "Fête",
-    img: "photo-1464349153735-7db50ed83c84",
+    img: "image4.jpeg",
     tagline: "Chaque âge mérite d'être fêté avec style",
     desc: "Qu'il s'agisse d'un 1er anniversaire, d'une fête surprise ou d'un grand événement festif, nous créons des menus joyeux et colorés, des finger foods tendances et des gâteaux qui font des souvenirs.",
     features: [
@@ -221,6 +228,7 @@ const eventServices = [
 ];
 
 function EventServiceRow({
+  id,
   title,
   badge,
   img,
@@ -229,16 +237,24 @@ function EventServiceRow({
   features,
   reverse,
 }: (typeof eventServices)[0] & { reverse: boolean }) {
+  const getSrc = (file: string) =>
+    file.startsWith("http")
+      ? file
+      : file.startsWith("photo-")
+      ? `https://images.unsplash.com/${file}?w=800&h=600&fit=crop&auto=format`
+      : `/images/${file}`;
+
   return (
     <div
-      className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ${
+      id={id}
+      className={`scroll-mt-28 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ${
         reverse ? "lg:flex-row-reverse" : ""
       }`}
     >
       <div className={reverse ? "lg:order-2" : ""}>
         <div className="relative rounded-sm overflow-hidden aspect-[4/3] group shadow-lg">
           <img
-            src={`https://images.unsplash.com/${img}?w=800&h=600&fit=crop&auto=format`}
+            src={getSrc(img)}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
@@ -286,11 +302,17 @@ function SpecialOrderCard({
   color: "raspberry" | "gold";
 }) {
   const accent = color === "raspberry" ? "#C2255C" : "#D4AF37";
+  const imgSrc = img.startsWith("http")
+    ? img
+    : img.startsWith("photo-")
+    ? `https://images.unsplash.com/${img}?w=800&h=450&fit=crop&auto=format`
+    : `/images/${img}`;
+
   return (
     <div className="rounded-sm overflow-hidden border border-[#D4AF37]/20 shadow-sm hover:shadow-md transition-shadow">
       <div className="relative aspect-[16/9] overflow-hidden">
         <img
-          src={`https://images.unsplash.com/${img}?w=800&h=450&fit=crop&auto=format`}
+          src={imgSrc}
           alt={title}
           className="w-full h-full object-cover"
         />
