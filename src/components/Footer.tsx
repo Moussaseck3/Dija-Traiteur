@@ -30,7 +30,7 @@ export default function Footer({ navigate }: FooterProps) {
                   Dija Traiteur
                 </div>
                 <div className="text-[10px] text-gold tracking-[0.2em] uppercase mt-1">
-                  Excellence Culinaire
+                   Yaay Chef
                 </div>
               </div>
             </div>
